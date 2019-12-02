@@ -134,4 +134,20 @@ if [ $auto_k = 1 ];then
 	esac
 fi
 
+#Python3-pipのインストール
+python3 --version
+echo "Install Python3-pip(pip is Python3's Comand) ?(y/n)"
+read IN
+case $IN in
+	y|Y)
+	echo "Start Install Python3-pip..."
+	sudo apt install python3-pip
+	pip3 install elasticsearch
+	sudo apt install jq
+	echo "Install Python3-pip is Completed!";;
+	n|N)
+	echo "Skip Python3-pip Install";;
+esac
+
+
 echo "==========END INSTALL SCRIPT=========="

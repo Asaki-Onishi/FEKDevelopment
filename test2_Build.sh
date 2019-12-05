@@ -56,24 +56,6 @@ case $IN in
 	echo "Skip Elasticsearch Install";;
 esac
 
-#Elasticsearchの自動起動有効化
-if [ $auto_e = 1 ];then
-	echo "Elasticsearch AutoStarting Setting ?(y/n)"
-	read OP
-	case $OP in
-		y|Y)
-		echo "Elasticsearch Service AutoStarted..."
-		#sudo update-rc.d elasticsearch defaults 95 10
-		#sudo service elasticsearch start
-		#sudo service elasticsearch status
-		sudo /bin/systemctl daemon-reload
-		sudo /bin/systemctl enable elasticsearch.service
-		echo "Completed!";;
-		n|N)
-		echo "Skip Setting!";;
-	esac
-fi
-
 #Fluentdのインストール
 echo "Install Fluentd(td-agent) ?(y/n)"
 read IN
@@ -86,21 +68,6 @@ case $IN in
 	n|N)
 	echo "Skip Fluentd Install";;
 esac
-
-#Fluentdの自動起動有効化
-if [ $auto_f = 1 ];then
-	echo "Fluentd AutoStarting Setting ?(y/n)"
-	read OP
-	case $OP in
-		y|Y)
-		echo "Fluentd Service AutoStarted..."
-		sudo /bin/systemctl daemon-reload
-		sudo /bin/systemctl enable td-agent.service
-		echo "Completed!";;
-		n|N)
-		echo "Skip Setting!";;
-	esac
-fi
 
 #Kibanaのインストール
 echo "Install Kibana ?(y/n)"
@@ -119,34 +86,19 @@ case $IN in
 	echo "Skip Kibana Install";;
 esac
 
-#Kibanaの自動起動有効化
-if [ $auto_k = 1 ];then
-	echo "Kibana AutoStarting Setting ?(y/n)"
-	read OP
-	case $OP in
-		y|Y)
-		echo "Kibana Service AutoStarted..."
-		sudo /bin/systemctl daemon-reload
-		sudo /bin/systemctl enable kibana.service
-		echo "Completed!";;
-		n|N)
-		echo "Skip Setting!";;
-	esac
-fi
-
 #Python3-pipのインストール
 python3 --version
-echo "Install Python3-pip(pip is Python3's Comand) ?(y/n)"
+echo "Install Python-pip(pip is Python's Comand) ?(y/n)"
 read IN
 case $IN in
 	y|Y)
-	echo "Start Install Python3-pip..."
-	sudo apt install python3-pip
-	pip3 install elasticsearch
+	echo "Start Install Python-pip..."
+	sudo apt install python-pip
+	pip install elasticsearch
 	sudo apt install jq
-	echo "Install Python3-pip is Completed!";;
+	echo "Install Python-pip is Completed!";;
 	n|N)
-	echo "Skip Python3-pip Install";;
+	echo "Skip Python-pip Install";;
 esac
 
 

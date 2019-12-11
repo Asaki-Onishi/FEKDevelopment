@@ -3,7 +3,6 @@ set -e
 
 echo "FEK_System AutoStarting Setting..."
 #FEKの自動起動有効化
-sudo systemctl daemon-reload
 sudo systemctl enable elasticsearch.service
 sudo systemctl enable td-agent.service
 sudo systemctl enable kibana.service

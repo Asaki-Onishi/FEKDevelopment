@@ -1,5 +1,7 @@
 # FEKDevelopment
 ## はじめに
+お急ぎの方はこちら→
+[簡易版・卒業研究について](./etc/about_sotsuron.md)
 - FEKとは
   - Fluentd
   - Elasticsearch

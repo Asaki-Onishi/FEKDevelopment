@@ -53,7 +53,7 @@ case $IN in
         	echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
 	fi    
     	sudo apt update && apt install elasticsearch
-	sudo dpkg -l | grep elasticsearch
+		sudo dpkg -l | grep elasticsearch
 	echo "Install Elasticsearch is Completed!";;
 	n|N)
 	echo "Skip Elasticsearch Install";;
@@ -97,6 +97,7 @@ case $IN in
 	y|Y)
 	echo "Start Install Python-pip..."
 	sudo apt install python-pip
+	sudo apt install python3-pip
 	pip install elasticsearch
 	sudo apt install jq
 	echo "Install Python-pip is Completed!";;

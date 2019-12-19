@@ -23,7 +23,7 @@
 ### １．少子化による労働人口の減少
 知っての通り、少子化による労働人口の減少は著しく特にIT人材の不足がチョーやばい。内閣府平成30年度経済財政報告書によると、他の先進諸国と比較して供給人口が低く人材不足が深刻。ビッグデータやアナリティクスの活用割合も2割程度低い、重要視されづらいため関わる人材が更に減少中。
 <div style="text-align: center">
-<img src="./no2.png">
+<img src="https://github.com/Asaki-Onishi/FEKDevelopment/blob/master/etc/no2.PNG">
 図2.総務省平成24年度　国勢調査
 </div>
   
@@ -57,7 +57,7 @@
 分析・監視システムの土台となる基盤の構築は、オープンソースソフトウェア(以下、OSS)を利用する。システム全体の概念図は下記の通り。
 
 <div style="text-align: center">
-<img src="./no3.png">
+<img src="https://github.com/Asaki-Onishi/FEKDevelopment/blob/master/etc/no3.PNG">
 図3.システムの概念図
 </div>
 

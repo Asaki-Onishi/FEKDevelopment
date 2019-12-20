@@ -65,15 +65,20 @@
 
 システム全体の流れとしては、ネットワークからログデータを収集し、蓄積したデータを分析・監視システムを通して可視化を行うものである。
 
+<img src="https://github.com/Asaki-Onishi/FEKDevelopment/blob/master/etc/no4.PNG">
+
 - ## Elasticsearch
+<img src="https://github.com/Asaki-Onishi/FEKDevelopment/blob/master/etc/Elasicsearch-logo.png">  
 ログデータを蓄積を担当するソフトウェア。  
 elastic社が開発・提供している全文検索ソフトウェアで、Java環境で動作している。関係データベース(RDB)とはデータの蓄積と管理では共通点があるが、Elasticsearchは検索処理をメインで行うアーキテクチャであるため検索条件に対して柔軟に対応出来る。
 
 - ## Fluentd
+<img src="https://github.com/Asaki-Onishi/FEKDevelopment/blob/master/etc/Fluentd-logo.jpg">  
 ログデータを収集するミドルウェア。
 プラグインが非常に豊富で、収集したデータを一定の形式に成型したりストリーミング処理による軽快な動作が可能。データ成型機能により不特定多数の機器から、送信される異なる形式データであっても対応出来る拡張性の高さを誇る。
 
 - ## Kibana
+<img src="https://github.com/Asaki-Onishi/FEKDevelopment/blob/master/etc/Kibana-logo.png">  
 可視化を行うソフトウェア。
 Elasticsearchと同じくelastic社より開発・提供されるソフトウェアで、elasticsearchとの親和性が高い。組み合わせる場合、elasticsearch内にkibanaの設定を保持するため障害発生時にある程度の可用性がある。
 

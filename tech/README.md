@@ -12,5 +12,6 @@ Linuxは拡張子でファイルを区別しているのではないのかとい
 [VirtualBoxでGuestAdditionsがおかしくなったら](./About_VirtualBox_GuestAdditions.md)  
   
 ---
-## MakeFileの神髄(特記勉強用)
+## リリースの神髄(特記勉強用)
 [Makefileについて](./Study_make.md)
+[cronの深奥](./cron.md)

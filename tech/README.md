@@ -13,5 +13,5 @@ Linuxは拡張子でファイルを区別しているのではないのかとい
   
 ---
 ## リリースの神髄(特記勉強用)
-[Makefileについて](./Study_make.md)
-[cronの深奥](./cron.md)
+[Makefileについて](./Study_make.md)  
+[cronの深奥](./cron.md)  

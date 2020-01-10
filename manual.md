@@ -9,7 +9,7 @@
 1. ログ分析システムの展開  
 1-1. 本マニュアルの記述に関しての留意点  
 1-2. Debianパッケージの更新  
-1-3. fek_packageのダウンロードと解凍  
+1-3. fek_packageの入手  
 1-4. Makefileの展開(Makefile調整中)  
 
 2. FEK基盤各種の設定  
@@ -74,6 +74,7 @@ search.shが異常を検知した際に起動するslackにアクセスするた
 - kanshi_config.sh.in  
 監視パッケージのslackbotの設定に関するファイル。  
 
+makeコマンドが実行後は、`/usr/local`下に`kanshi`ディレクトリと`/usr/local/etc`下に`fek`ディレクトリが作成される。
 
 ### 丙 . 試験構築環境について
 ログデータ分析システムの構築にあたって、複数の環境での動作を検証するため仮想化ソフトウェアを利用した。試験構築に利用した環境であり、ログデータ分析システムを稼働させる環境としては推奨できない。あくまで参考ために記載しておく。
@@ -98,7 +99,7 @@ VirtualBox  version 6.0.14
 
 ### 1-1 . 本マニュアルの記述に関しての留意点
 以降の記述にはコマンド操作が多数含まれている。手順のコマンドラインの先頭記号に注意すること。
-**$** が一般ユーザ、**#** が管理者（root）である。  
+`$` が一般ユーザ、`#` が管理者（root）である。  
 
 ```
 例  
@@ -109,4 +110,77 @@ $ apt update　一般ユーザーで実行。
 また、ファイル内には`#説明等のコメント`や`#!/bin/sh`といった記述があることがある。これらはコマンドの指示ではなく、ファイル内の設定や注釈が記載されているだけである。  
 
 
-### 1-2 . パッケージの更新
+### 1-2 . Debianパッケージの更新
+作業のため、ユーザーの変更を行う。  
+```
+$ su
+パスワード：*****
+```
+構築ツールを利用する前にDebianパッケージのアップデートを行う。  
+```
+パッケージリストの確認
+# apt update
+
+パッケージの更新
+# apt upgrade
+
+必要なコマンドをインストール（既にインストールされている場合は省略）
+# apt install vim
+# apt install autoconf
+```
+エラーを出力した際には、ネットワーク設定および`/etc/apt/sources.list`を確認すること。  
+  
+
+### 1-3 . fek_package入手
+fek_packageをダウンロード或いは取得してください。  
+パッケージは圧縮されているため、拡張子に「.tar.gz」と表記されている。  
+fek_packageは場合によってはfek_package_m*（m1やm2といった何かしらの数字）と表記されていることがあるが、内容には変更点はない。以降はfek_packageと表記する。  
+
+#### USBメモリからfek_package.tar.gzを取得する場合 
+```
+外部メディア（USBメモリ）ディレクトリへ移動
+# cd /media/****（該当外部メディア）
+
+homeディレクトリ下のユーザーディレクトリへコピー
+# cp fek_package.tar.gz /home/***（ユーザー）
+
+ユーザーディレクトリへ移動
+# cd /home/***（ユーザー）
+```
+
+#### fek_package.tar.gzをダウンロードする場合
+[このリンク先から](https://github.com/Asaki-Onishi/FEKDevelopment/blob/master/fek_package_m1.tar.gz)ダウンロードし、/home/***（ユーザー）下に配置する。
+```
+mvコマンドで移動
+# mv fek_package.tar.gz /home/***（ユーザー）
+
+ユーザーディレクトリへ移動
+# cd /home/***（ユーザー）
+```
+
+#### fek_package.tar.gzを解凍する
+```
+gzipコマンドで解凍
+# gzip -d fek_package.tar.gz
+
+tarコマンドでアーカイブを展開
+# tar -xvf fek_package.tar
+
+lsコマンドできちんと展開出来ているか確認
+# ls
+fek_package
+```
+
+### 1-4 . Makefileの展開
+```
+fek_packageディレクトリへ移動
+# cd fek_package
+
+autoconfコマンドを実行
+# autoconf
+
+生成されたconfigureファイルを実行
+# ./configure
+
+生成されたMakefileを実行
+# make install

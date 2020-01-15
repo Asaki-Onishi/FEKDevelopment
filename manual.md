@@ -13,7 +13,7 @@
 1-4. Makefileの展開  
 
 2. FEK基盤各種の設定  
-2-1. FEKの状態確認
+2-1. FEKの状態確認  
 2-2. Fluentdの設定  
 
 3. 監視パッケージの起動  
@@ -40,7 +40,7 @@
 - Kibana  
 Elasticsearchに格納されたデータを、分析しグラフ等に可視化するOSS。ログデータ分析システムでは、入力されたデータの状態を確認するために使用される。Kibana本体のデータはElasticsearch内に保存されている。そのため、外部クライアントに異常が発生した場合でも他のコンピュータから接続できる可用性を備える。
 
-- 監視パッケージ
+- 監視パッケージ  
 前述したOSSで構成されるFEK基盤を利用する監視システム。Fluentdにアクセスし、ログデータに任意の異常が確認された際に利用者へSlackを通じて通知を行う。
 
 
@@ -59,7 +59,7 @@ Elasticsearchに格納されたデータを、分析しグラフ等に可視化�
 
 上から順番に  
 - Makefile.in  
-実行ファイル生成の核となるMakefileを生成するための設定ファイル。生成されたMakefileは、ログ分析システムのパッケージを展開に必要なディレクトリを自動生成し、各種プログラムファイルの配置を行う。
+実行ファイル生成の核となるMakefileを生成するための設定ファイル。生成されたMakefileは、ログ分析システムのパッケージの展開に必要なディレクトリを自動生成し、各種プログラムファイルの配置を行う。
 - configure.in  
 ログ分析システムが、構築環境の差異によって誤った設定をされるのを防ぐためのファイル。autoconfコマンドによってconfugureファイルを生成する。生成されたconfigureファイルを実行することで、Makefile.inの情報を基にMakefileが生成される。  
 - build.sh.in  
@@ -195,7 +195,101 @@ fekを構築
 
 `make`コマンドを実行することで、installやbuildといったオプションの確認も出来る。
 
+---
+
 ## 2 . FEK基盤各種の設定
 ここまで、必要なソフトウェアとコマンドのダウンロードは完了した。ここからは、インストールしたFEK基盤の各種ソフトウェアの設定を行う。  
 
-### 2-1 . Fluentdの設定
+### 2-1 . FEKの状態確認
+インストールされたFEKが起動しているか確認する。
+```
+Elasticsearchの状態を確認
+# systemctl status elasticseach
+
+Kibanaの状態を確認
+# systemctl status kibana
+```
+**〇active**と緑字で表示されていれば問題ない。**〇Faild**と赤字で表示されている場合は、ソフトウェアが何らかの理由で停止しているため、再起動する必要がある。
+```
+例）Elasticsearchの再起動
+# systemctl restart elasticsearch
+```
+設定を変更したり、他のソフトウェアと連動させる等停止させたい場合は下記の通りに行う。
+```
+例）Elasticsearchを停止
+# systemctl stop elasticsearch
+```
+上記のコマンドを駆使し、FEKが全て正常に起動しているか確認する。
+
+### 2-2 . Fluentdの設定
+Fluentdは、インストールした直後ではそのまま利用することが出来ず設定を変更する必要がある。本システムでは、Fluentdの小型パッケージであるtd-agentを利用している。そのため、td-agentの設定を変更する。  
+```
+td-agent.serviceの設定を変更
+# vim /usr/lib/systemd/system/td-agnet.service
+```
+出てきたエディタ画面にて、**[Service]** の直下に書いてある`User`と`Group`を書き換える。今回はrootユーザで利用出来るように変更を行う。  
+#### 変更前
+```
+---中略---
+[Service]
+User=td-agent
+Group=td-agent
+```
+#### 変更後
+```
+---中略---
+[Service]
+User=root
+Group=root
+```
+変更後、td-agent.serviceを再起動させる。
+```
+td-agentの再起動
+# systemctl restart td-agent.service
+
+td-agentの状態を確認
+# systemctl status td-agent
+```
+active表示を確認出来ればFluentd（td-agent）の設定は完了した。
+
+---
+
+## 3 . 監視パッケージの起動
+監視パッケージは先の構築を行った際に`/usr/local`下に`kanshi`というディレクトリが作られ、そこに納められている。すなわち絶対パスでの位置は`/usr/local/kanshi`である。本項では監視パッケージの利用方法について説明する。  
+
+### 3-1 . kasnhi_config.shの設定
+kanshi_config.shは、slackbotにてエラーの送信に関する設定を行う。任意のURLとチャンネル設定を入力することで、利用出来る。
+```
+#!/bin/sh
+
+#Incoming WebHooksのURL
+#例）WEBHOOKURL="https://hooks.slack.com/services/XXXXXXXX"
+URL="https://hooks.slack.com/services/XXXXXXXX"
+
+#Slack送信チャンネルの設定
+#CHANNEL=${CHANNEL:-"#チャンネル名を入力"}
+NEW_CHANNEL="#チャンネル名を入力"
+
+#BOTNAME=${BOTNAME:-"botの名前を入力"}
+BOT_NAME="botの名前を入力"
+```
+`URL=`とある部分にSlackbotのURLを入力し、`NEW_CHANNEL=`にSlackチャンネル名と`BOT_NAME`に入力することで、BOTの名前を設定出来る。
+
+### 3-2 . search.shの起動
+3-1でSlackBotの設定を行った後に、kanshiディレクトリにある`search.sh`を実行する。
+```
+kanshiディレクトリへ移動
+# cd /usr/local/kanshi
+
+search.shの確認
+# ls -a
+
+search.shの実行
+# sh search.sh
+```
+
+---
+
+## 4 . メンテナンス（未定）
+
+# 工事中. . .

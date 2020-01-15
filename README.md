@@ -24,14 +24,15 @@ FEK環境を半自動でインストールしてくれるスクリプト
 - [インストールスクリプトについて](./About_InstallScript.md)  
 - [構築マニュアル](./manual.md)  
 最新版の構築パッケージはこちら
-- [fek_package_m1.tar.gz](./fek_package_m1.tar.gz)  
+- [fek_package_m2.tar.gz](./fek_package_m2.tar.gz)  
+- [fek_package_m1.tar.gz](./fek_package_m1.tar.gz)
 
 ---
 
 ## 工事中...
 
 1月10日追記　下記のスクリプト群は旧バージョンです。最新版のパッケージは上記の**fek_package**です。  
-ご利用の際には大西までご連絡ださい。  
+もし、利用したい等の問い合わせがあれば大西(email:cist.b216.a.oonisi@gmail.com)までご連絡ださい。  
 
 [strech.sh](./strech.sh)  
 事前インストールスクリプト。インストールスクリプトを初期状態のDebianで稼働させようとすると、コマンドが足りずに途中で停止してしまうためこちらを先に起動させること。このスクリプトに限らず、インストールなどの作業を行う際には**apt update**を行うこと。  

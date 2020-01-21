@@ -96,6 +96,7 @@ VirtualBox  version 6.0.14
 本項目からは、具体的な構築手順を記述していく。作業の前提として、本構築マニュアルで利用するOSは**Debian10 buster 10.10(64bit)** を使用する。一部のプログラムは他のOSには対応していない。  
 
 構築演習用コンピュータ仕様  
+
 |Maker|Type|CPU|Memory|HDD|
 |---|---|---|---|---|
 |Hewlett-Packard|XL51DAV|Intel core i3-2120|4 GB|250 GB|

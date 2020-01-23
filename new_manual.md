@@ -146,7 +146,7 @@ fek_packageは場合によってはfek_package_m*（m1やm2といった何かし
 https://github.com/nsrg-fmlorg/students-2019/blob/master/LogAnalysysTeam/b2160340/Hangar/fek_package.tar.gz  
 
 筆者のリポジトリからダウンロードする場合  
-https://github.com/Asaki-Onishi/FEKDevelopment/fek_package.tar.gz  
+https://github.com/Asaki-Onishi/FEKDevelopment/blob/master/fek_package.tar.gz  
 
 上記のURLにアクセスし[View raw]をクリックし、ダウンロードする。ダウンロードしたファイルを/home/***（ユーザー）下に配置する。
 ```

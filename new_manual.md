@@ -113,10 +113,10 @@ $ apt update　一般ユーザーで実行。
 
 また、ファイル内には`#説明等のコメント`や`#!/bin/sh`といった記述があることがある。これらはコマンドの指示ではなく、ファイル内の設定や注釈が記載されているだけである。  
 
-
 ### 1-2 . Debianパッケージの更新
 作業のため、ユーザーの変更を行う。  
 ```
+rootユーザーへの変更
 $ su
 パスワード：*****
 ```
@@ -141,24 +141,14 @@ fek_packageをダウンロード或いは取得してください。
 パッケージは圧縮されているため、拡張子に「.tar.gz」と表記されている。  
 fek_packageは場合によってはfek_package_m*（m1やm2といった何かしらの数字）と表記されていることがあるが、内容には変更点はない。以降はfek_packageと表記する。  
 
-#### USBメモリからfek_package.tar.gzを取得する場合 
-```
-外部メディア（USBメモリ）ディレクトリへ移動
-# cd /media/****（該当外部メディア）
+#### fek_package.tar.gzをダウンロードする
+深町研究室リポジトリからダウンロードする場合  
+https://github.com/nsrg-fmlorg/students-2019/blob/master/LogAnalysysTeam/b2160340/Hangar/fek_package.tar.gz  
 
-homeディレクトリ下のユーザーディレクトリへコピー
-# cp fek_package.tar.gz /home/***（ユーザー）
+筆者のリポジトリからダウンロードする場合  
+https://github.com/Asaki-Onishi/FEKDevelopment/fek_package.tar.gz  
 
-ユーザーディレクトリへ移動
-# cd /home/***（ユーザー）
-
-現在位置の確認(/home/***（ユーザー）であればOK)
-# pwd
-```
-
-#### fek_package.tar.gzをダウンロードする場合
-https://github.com/nsrg-fmlorg/students-2019/blob/master/LogAnalysysTeam/b2160340/Hangar/fek_package_m2.tar.gz  
-上記のURLからダウンロードし、/home/***（ユーザー）下に配置する。
+上記のURLにアクセスし[View raw]をクリックし、ダウンロードする。ダウンロードしたファイルを/home/***（ユーザー）下に配置する。
 ```
 ダウンロードしたfek_packageを確認する
 # cd /home/***（ユーザー）/ダウンロード
@@ -213,9 +203,10 @@ fekを構築
 
 ### 2-1 . FEKの状態確認
 インストールされたFEKが起動しているか確認する。
+本マニュアルでは、確認にsystemctlコマンドを使用する。
 ```
 Elasticsearchの状態を確認
-# systemctl status elasticseach
+# systemctl status elasticsearch
 
 Kibanaの状態を確認
 # systemctl status kibana
@@ -236,7 +227,7 @@ Kibanaの状態を確認
 Fluentdは、インストールした直後ではそのまま利用することが出来ず設定を変更する必要がある。本システムでは、Fluentdの小型パッケージであるtd-agentを利用している。そのため、td-agentの設定を変更する。  
 ```
 td-agent.serviceの設定を変更
-# vim /usr/lib/systemd/system/td-agnet.service
+# vim /usr/lib/systemd/system/td-agent.service
 ```
 出てきたエディタ画面にて、**[Service]** の直下に書いてある`User`と`Group`を書き換える。今回はrootユーザで利用出来るように変更を行う。  
 #### 変更前

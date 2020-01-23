@@ -23,11 +23,12 @@ FEK環境を半自動でインストールしてくれるスクリプト
 - 約2.5Gバイトの空き容量が必要です。  
 - [インストールスクリプトについて](./About_InstallScript.md)  
 - [完全版構築マニュアル（未完）](./manual.md)  
-- [卒論応用型マニュアル](./new_manual.md)  
+- [卒業論文評価用マニュアル](./new_manual.md)  
 
 最新版の構築パッケージはこちら(一番上が最新です)
 - [fek_package_m2.tar.gz](./fek_package_m2.tar.gz)  
 - [fek_package_m1.tar.gz](./fek_package_m1.tar.gz)
+- [卒業論文評価用fek_package](./fek_package.tar.gz)
 
 ---
 
